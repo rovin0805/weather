@@ -71,7 +71,7 @@ const weatherOptions = {
   },
 };
 
-export default function Weather({ temp, condition }) {
+export default function Weather({ temp, condition, city, country }) {
   return (
     <LinearGradient
       colors={
@@ -93,6 +93,9 @@ export default function Weather({ temp, condition }) {
           color="white"
         />
         <Text style={styles.temp}>{temp}°</Text>
+        <Text style={styles.place}>
+          {city} {country}
+        </Text>
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.title}>
@@ -125,6 +128,8 @@ Weather.propTypes = {
     "Mist",
     "Dust",
   ]).isRequired,
+  city: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({
@@ -133,6 +138,10 @@ const styles = StyleSheet.create({
   },
   temp: {
     fontSize: 42,
+    color: "white",
+  },
+  place: {
+    fontSize: 30,
     color: "white",
   },
   halfContainer: {

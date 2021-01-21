@@ -1,17 +1,69 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
-export default function Weather({ temp }) {
+const weatherOptions = {
+  Thunderstorm: {
+    iconName: "weather-lightning",
+    gradient: ["#373B44", "#4286f4"],
+  },
+  Drizzle: {
+    iconName: "weather-hail",
+    gradient: ["#89F7FE", "#66A6FF"],
+  },
+  Rain: {
+    iconName: "weather-rainy",
+    gradient: ["#00C6FB", "#005BEA"],
+  },
+  Snow: {
+    iconName: "weather-snowy",
+    gradient: ["#7DE2FC", "#B9B6E5"],
+  },
+  Atmosphere: {
+    iconName: "weather-hail",
+    gradient: ["#89F7FE", "#66A6FF"],
+  },
+  Clear: {
+    iconName: "weather-sunny",
+    gradient: ["#FF7300", "#FEF253"],
+  },
+  Clouds: {
+    iconName: "weather-cloudy",
+    gradient: ["#D7D2CC", "#304352"],
+  },
+  Mist: {
+    iconName: "weather-hail",
+    gradient: ["#4DA0B0", "#D39D38"],
+  },
+  Dust: {
+    iconName: "weather-hail",
+    gradient: ["#4DA0B0", "#D39D38"],
+  },
+  Haze: {
+    iconName: "weather-hail",
+    gradient: ["#4DA0B0", "#D39D38"],
+  },
+};
+
+export default function Weather({ temp, condition }) {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={weatherOptions[condition].gradient}
+      style={styles.container}
+    >
+      <StatusBar barStyle="light-content" />
       <View style={styles.halfContainer}>
-        <MaterialCommunityIcons size={96} name="weather-lightning-rainy" />
+        <MaterialCommunityIcons
+          size={96}
+          name={weatherOptions[condition].iconName}
+          color="white"
+        />
         <Text style={styles.temp}>{temp}º</Text>
       </View>
       <View style={styles.container}></View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -39,6 +91,7 @@ const styles = StyleSheet.create({
   },
   temp: {
     fontSize: 42,
+    color: "white",
   },
   halfContainer: {
     flex: 1,
